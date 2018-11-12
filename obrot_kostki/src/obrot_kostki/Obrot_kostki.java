@@ -156,9 +156,21 @@ public class Obrot_kostki {
             wierz_6_wynik = transl_2.times(transform).times(transl_1).times(wierz_6);
             wierz_7_wynik = transl_2.times(transform).times(transl_1).times(wierz_7);
             wierz_8_wynik = transl_2.times(transform).times(transl_1).times(wierz_8);
+            
+            wierz_1_wynik.print(10, 1);
+           // wierz_2_wynik.print(10, 1);
+            //wierz_3_wynik.print(10, 1);
+            //wierz_4_wynik.print(10, 1);
+            //wierz_5_wynik.print(10, 1);
+            //wierz_6_wynik.print(10, 1);
+            //wierz_7_wynik.print(10, 1);
+            //wierz_8_wynik.print(10, 1);
+            
+            System.out.println(i + " " + t);
 
             //gnuplot wydruk 100 klatek dla kazdego wierzcholka
-            t += 1 / 100;
+            t += 1.0 / 100;
+           
         }
 
     }
