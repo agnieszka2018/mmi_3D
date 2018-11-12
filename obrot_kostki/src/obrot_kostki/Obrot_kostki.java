@@ -64,6 +64,8 @@ public class Obrot_kostki {
         double[][] translacja_2 = {{1.0, 0.0, 0.0, x0}, {0.0, 1.0, 0.0, y0}, {0.0, 0.0, 1.0, z0}, {0.0, 0.0, 0.0, 1.0}};
         Matrix transl_2 = new Matrix(translacja_2, 4, 4);
 
+        double t = 0.0; // t = 0..1, przy kazdym kroku dodać 1/100!
+        
         System.out.println("Podaj kolejno kąt: alfa, beta, gamma (w stopniach): ");
         double alfa;
         alfa = scan.nextDouble();
@@ -74,38 +76,10 @@ public class Obrot_kostki {
         double gamma;
         gamma = scan.nextDouble();
 
-        double t = 0.0; // t = 0..1, przy kazdym kroku dodać 1/100!
-
-        //macierz obrotu o kat alfa w zaleznosci od czasu t wzdluz osi z
-        double[][] obrot_alfa = {{Math.cos(t * Math.toRadians(alfa)), -Math.sin(t * Math.toRadians(alfa)), 0.0, 0.0},
-        {Math.sin(t * Math.toRadians(alfa)), -Math.cos(t * Math.toRadians(alfa)), 0.0, 0.0},
-        {0.0, 0.0, 1.0, 0.0},
-        {0.0, 0.0, 0.0, 1.0}};
-        Matrix obr_alfa = new Matrix(obrot_alfa, 4, 4);
-
-        //macierz obrotu o kat beta w zaleznosci od czasu t wzdluz osi y
-        double[][] obrot_beta = {{Math.cos(t * Math.toRadians(beta)), 0.0, Math.sin(t * Math.toRadians(beta)), 0.0},
-        {0.0, 1.0, 0.0, 0.0},
-        {-Math.sin(t * Math.toRadians(beta)), 0.0, Math.cos(t * Math.toRadians(beta)), 0.0},
-        {0.0, 0.0, 0.0, 1.0}};
-        Matrix obr_beta = new Matrix(obrot_beta, 4, 4);
-
-        //macierz obrotu o kat gamma w zaleznosci od czasu t wzdluz osi x
-        double[][] obrot_gamma = {{1.0, 0.0, 0.0, 0.0},
-        {0.0, Math.cos(t * Math.toRadians(gamma)), -Math.sin(t * Math.toRadians(gamma)), 0.0},
-        {0.0, Math.sin(t * Math.toRadians(gamma)), Math.cos(t * Math.toRadians(gamma)), 0.0},
-        {0.0, 0.0, 0.0, 1.0}};
-        Matrix obr_gamma = new Matrix(obrot_gamma, 4, 4);
-
-        //macierz skalowania w zaleznosci od t
         System.out.println("Podaj ile razy chcesz przeskalować (przy założeniu, że k > 0): ");
         double k;
         k = scan.nextDouble();
-        double[][] skala = {{Math.pow(k, t), 0.0, 0.0, 0.0},
-        {0.0, Math.pow(k, t), 0.0, 0.0},
-        {0.0, 0.0, Math.pow(k, t), 0.0},
-        {0.0, 0.0, 0.0, 1.0}};
-        Matrix skalowanie = new Matrix(skala, 4, 4);
+
 
         //obliczenia: ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
         //macierz wierzcholek 1 - wynik
@@ -146,8 +120,36 @@ public class Obrot_kostki {
 
         for (int i = 0; i <= 100; i++) {
 
-            transform = skalowanie.times(obr_gamma).times(obr_beta).times(obr_alfa); //uniwersalne dla wszystkich wierzcholkow, ale rozne w zaleznosci od t
+            //macierz obrotu o kat alfa w zaleznosci od czasu t wzdluz osi z
+            double[][] obrot_alfa = {{Math.cos(t * Math.toRadians(alfa)), -Math.sin(t * Math.toRadians(alfa)), 0.0, 0.0},
+            {Math.sin(t * Math.toRadians(alfa)), Math.cos(t * Math.toRadians(alfa)), 0.0, 0.0},
+            {0.0, 0.0, 1.0, 0.0},
+            {0.0, 0.0, 0.0, 1.0}};
+            Matrix obr_alfa = new Matrix(obrot_alfa, 4, 4);
 
+            //macierz obrotu o kat beta w zaleznosci od czasu t wzdluz osi y
+            double[][] obrot_beta = {{Math.cos(t * Math.toRadians(beta)), 0.0, Math.sin(t * Math.toRadians(beta)), 0.0},
+            {0.0, 1.0, 0.0, 0.0},
+            {-Math.sin(t * Math.toRadians(beta)), 0.0, Math.cos(t * Math.toRadians(beta)), 0.0},
+            {0.0, 0.0, 0.0, 1.0}};
+            Matrix obr_beta = new Matrix(obrot_beta, 4, 4);
+
+            //macierz obrotu o kat gamma w zaleznosci od czasu t wzdluz osi x
+            double[][] obrot_gamma = {{1.0, 0.0, 0.0, 0.0},
+            {0.0, Math.cos(t * Math.toRadians(gamma)), -Math.sin(t * Math.toRadians(gamma)), 0.0},
+            {0.0, Math.sin(t * Math.toRadians(gamma)), Math.cos(t * Math.toRadians(gamma)), 0.0},
+            {0.0, 0.0, 0.0, 1.0}};
+            Matrix obr_gamma = new Matrix(obrot_gamma, 4, 4);
+
+            //macierz skalowania w zaleznosci od t
+            double[][] skala = {{Math.pow(k, t), 0.0, 0.0, 0.0},
+            {0.0, Math.pow(k, t), 0.0, 0.0},
+            {0.0, 0.0, Math.pow(k, t), 0.0},
+            {0.0, 0.0, 0.0, 1.0}};
+            Matrix skalowanie = new Matrix(skala, 4, 4);
+
+            transform = skalowanie.times(obr_gamma).times(obr_beta).times(obr_alfa); //uniwersalne dla wszystkich wierzcholkow, ale rozne w zaleznosci od t
+        
             wierz_1_wynik = transl_2.times(transform).times(transl_1).times(wierz_1);
             wierz_2_wynik = transl_2.times(transform).times(transl_1).times(wierz_2);
             wierz_3_wynik = transl_2.times(transform).times(transl_1).times(wierz_3);
@@ -156,18 +158,18 @@ public class Obrot_kostki {
             wierz_6_wynik = transl_2.times(transform).times(transl_1).times(wierz_6);
             wierz_7_wynik = transl_2.times(transform).times(transl_1).times(wierz_7);
             wierz_8_wynik = transl_2.times(transform).times(transl_1).times(wierz_8);
-            
-            wierz_1_wynik.print(10, 1);
-           // wierz_2_wynik.print(10, 1);
-            //wierz_3_wynik.print(10, 1);
-            //wierz_4_wynik.print(10, 1);
-            //wierz_5_wynik.print(10, 1);
-            //wierz_6_wynik.print(10, 1);
-            //wierz_7_wynik.print(10, 1);
-            //wierz_8_wynik.print(10, 1);
-            
-            System.out.println(i + " " + t);
 
+            System.out.println("iteracja i=" + i + ", t=" + t);
+            wierz_1_wynik.print(10, 6);
+            wierz_2_wynik.print(10, 6);
+            wierz_3_wynik.print(10, 6);
+            wierz_4_wynik.print(10, 6);
+            wierz_5_wynik.print(10, 6);
+            wierz_6_wynik.print(10, 6);
+            wierz_7_wynik.print(10, 6);
+            wierz_8_wynik.print(10, 6);
+
+           
             //gnuplot wydruk 100 klatek dla kazdego wierzcholka
             t += 1.0 / 100;
 
