@@ -22,28 +22,28 @@ public class Obrot_kostki {
 
     public static void wczytaj_dane() {
 
-        double[][] wierzcholek_1 = {{1}, {1}, {1}, {1}};
+        double[][] wierzcholek_1 = {{1.0}, {1.0}, {1.0}, {1.0}};
         Matrix wierz_1 = new Matrix(wierzcholek_1, 4, 1); //macierz pionowa wierzchołek nr 1 wartosc poczatkowa
 
-        double[][] wierzcholek_2 = {{1}, {1}, {-1}, {1}};
+        double[][] wierzcholek_2 = {{1.0}, {1.0}, {-1.0}, {1.0}};
         Matrix wierz_2 = new Matrix(wierzcholek_2, 4, 1); //macierz pionowa wierzchołek nr 2 wartosc poczatkowa
 
-        double[][] wierzcholek_3 = {{1}, {-1}, {-1}, {1}};
+        double[][] wierzcholek_3 = {{1.0}, {-1.0}, {-1.0}, {1.0}};
         Matrix wierz_3 = new Matrix(wierzcholek_3, 4, 1); //macierz pionowa wierzchołek nr 3 wartosc poczatkowa
 
-        double[][] wierzcholek_4 = {{-1}, {-1}, {-1}, {1}};
+        double[][] wierzcholek_4 = {{-1.0}, {-1.0}, {-1.0}, {1.0}};
         Matrix wierz_4 = new Matrix(wierzcholek_4, 4, 1); //macierz pionowa wierzchołek nr 4 wartosc poczatkowa
 
-        double[][] wierzcholek_5 = {{-1}, {-1}, {1}, {1}};
+        double[][] wierzcholek_5 = {{-1.0}, {-1.0}, {1.0}, {1.0}};
         Matrix wierz_5 = new Matrix(wierzcholek_5, 4, 1); //macierz pionowa wierzchołek nr 5 wartosc poczatkowa
 
-        double[][] wierzcholek_6 = {{-1}, {1}, {1}, {1}};
+        double[][] wierzcholek_6 = {{-1.0}, {1.0}, {1.0}, {1.0}};
         Matrix wierz_6 = new Matrix(wierzcholek_6, 4, 1); //macierz pionowa wierzchołek nr 6 wartosc poczatkowa
 
-        double[][] wierzcholek_7 = {{-1}, {1}, {-1}, {1}};
+        double[][] wierzcholek_7 = {{-1.0}, {1.0}, {-1.0}, {1.0}};
         Matrix wierz_7 = new Matrix(wierzcholek_7, 4, 1); //macierz pionowa wierzchołek nr 7 wartosc poczatkowa
 
-        double[][] wierzcholek_8 = {{1}, {-1}, {1}, {1}};
+        double[][] wierzcholek_8 = {{1.0}, {-1.0}, {1.0}, {1.0}};
         Matrix wierz_8 = new Matrix(wierzcholek_8, 4, 1); //macierz pionowa wierzchołek nr 8 wartosc poczatkowa
 
         System.out.println("Podaj kolejno współrzędne x0, y0 i z0: ");
@@ -57,11 +57,11 @@ public class Obrot_kostki {
         z0 = scan.nextDouble();
 
         //macierz 1. translacji 4x4
-        double[][] translacja_1 = {{1, 0, 0, -x0}, {0, 1, 0, -y0}, {0, 0, 1, -z0}, {0, 0, 0, 1}};
+        double[][] translacja_1 = {{1.0, 0.0, 0.0, -x0}, {0.0, 1.0, 0.0, -y0}, {0.0, 0.0, 1.0, -z0}, {0.0, 0.0, 0.0, 1.0}};
         Matrix transl_1 = new Matrix(translacja_1, 4, 4);
 
         //macierz 2. translacji 4x4
-        double[][] translacja_2 = {{1, 0, 0, x0}, {0, 1, 0, y0}, {0, 0, 1, z0}, {0, 0, 0, 1}};
+        double[][] translacja_2 = {{1.0, 0.0, 0.0, x0}, {0.0, 1.0, 0.0, y0}, {0.0, 0.0, 1.0, z0}, {0.0, 0.0, 0.0, 1.0}};
         Matrix transl_2 = new Matrix(translacja_2, 4, 4);
 
         System.out.println("Podaj kolejno kąt: alfa, beta, gamma (w stopniach): ");
@@ -74,74 +74,74 @@ public class Obrot_kostki {
         double gamma;
         gamma = scan.nextDouble();
 
-        double t = 0; // t = 0..1, przy kazdym kroku dodać 1/100!
+        double t = 0.0; // t = 0..1, przy kazdym kroku dodać 1/100!
 
         //macierz obrotu o kat alfa w zaleznosci od czasu t wzdluz osi z
-        double[][] obrot_alfa = {{Math.cos(t * Math.toRadians(alfa)), -Math.sin(t * Math.toRadians(alfa)), 0, 0},
-        {Math.sin(t * Math.toRadians(alfa)), -Math.cos(t * Math.toRadians(alfa)), 0, 0},
-        {0, 0, 1, 0},
-        {0, 0, 0, 1}};
+        double[][] obrot_alfa = {{Math.cos(t * Math.toRadians(alfa)), -Math.sin(t * Math.toRadians(alfa)), 0.0, 0.0},
+        {Math.sin(t * Math.toRadians(alfa)), -Math.cos(t * Math.toRadians(alfa)), 0.0, 0.0},
+        {0.0, 0.0, 1.0, 0.0},
+        {0.0, 0.0, 0.0, 1.0}};
         Matrix obr_alfa = new Matrix(obrot_alfa, 4, 4);
 
         //macierz obrotu o kat beta w zaleznosci od czasu t wzdluz osi y
-        double[][] obrot_beta = {{Math.cos(t * Math.toRadians(beta)), 0, Math.sin(t * Math.toRadians(beta)), 0},
-        {0, 1, 0, 0},
-        {-Math.sin(t * Math.toRadians(beta)), 0, Math.cos(t * Math.toRadians(beta)), 0},
-        {0, 0, 0, 1}};
+        double[][] obrot_beta = {{Math.cos(t * Math.toRadians(beta)), 0.0, Math.sin(t * Math.toRadians(beta)), 0.0},
+        {0.0, 1.0, 0.0, 0.0},
+        {-Math.sin(t * Math.toRadians(beta)), 0.0, Math.cos(t * Math.toRadians(beta)), 0.0},
+        {0.0, 0.0, 0.0, 1.0}};
         Matrix obr_beta = new Matrix(obrot_beta, 4, 4);
 
         //macierz obrotu o kat gamma w zaleznosci od czasu t wzdluz osi x
-        double[][] obrot_gamma = {{1, 0, 0, 0},
-        {0, Math.cos(t * Math.toRadians(gamma)), -Math.sin(t * Math.toRadians(gamma)), 0},
-        {0, Math.sin(t * Math.toRadians(gamma)), Math.cos(t * Math.toRadians(gamma)), 0},
-        {0, 0, 0, 1}};
+        double[][] obrot_gamma = {{1.0, 0.0, 0.0, 0.0},
+        {0.0, Math.cos(t * Math.toRadians(gamma)), -Math.sin(t * Math.toRadians(gamma)), 0.0},
+        {0.0, Math.sin(t * Math.toRadians(gamma)), Math.cos(t * Math.toRadians(gamma)), 0.0},
+        {0.0, 0.0, 0.0, 1.0}};
         Matrix obr_gamma = new Matrix(obrot_gamma, 4, 4);
 
         //macierz skalowania w zaleznosci od t
         System.out.println("Podaj ile razy chcesz przeskalować (przy założeniu, że k > 0): ");
         double k;
         k = scan.nextDouble();
-        double[][] skala = {{Math.pow(k, t), 0, 0, 0},
-        {0, Math.pow(k, t), 0, 0},
-        {0, 0, Math.pow(k, t), 0},
-        {0, 0, 0, 1}};
+        double[][] skala = {{Math.pow(k, t), 0.0, 0.0, 0.0},
+        {0.0, Math.pow(k, t), 0.0, 0.0},
+        {0.0, 0.0, Math.pow(k, t), 0.0},
+        {0.0, 0.0, 0.0, 1.0}};
         Matrix skalowanie = new Matrix(skala, 4, 4);
 
         //obliczenia: ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
         //macierz wierzcholek 1 - wynik
-        double[][] wierzcholek_1_wynik = {{0}, {0}, {0}, {0}};
+        double[][] wierzcholek_1_wynik = {{0.0}, {0.0}, {0.0}, {0.0}};
         Matrix wierz_1_wynik = new Matrix(wierzcholek_1_wynik, 4, 1);
 
         //macierz wierzcholek 2 - wynik
-        double[][] wierzcholek_2_wynik = {{0}, {0}, {0}, {0}};
+        double[][] wierzcholek_2_wynik = {{0.0}, {0.0}, {0.0}, {0.0}};
         Matrix wierz_2_wynik = new Matrix(wierzcholek_2_wynik, 4, 1);
 
         //macierz wierzcholek 3 - wynik
-        double[][] wierzcholek_3_wynik = {{0}, {0}, {0}, {0}};
+        double[][] wierzcholek_3_wynik = {{0.0}, {0.0}, {0.0}, {0.0}};
         Matrix wierz_3_wynik = new Matrix(wierzcholek_3_wynik, 4, 1);
 
         //macierz wierzcholek 4 - wynik
-        double[][] wierzcholek_4_wynik = {{0}, {0}, {0}, {0}};
+        double[][] wierzcholek_4_wynik = {{0.0}, {0.0}, {0.0}, {0.0}};
         Matrix wierz_4_wynik = new Matrix(wierzcholek_4_wynik, 4, 1);
 
         //macierz wierzcholek 5 - wynik
-        double[][] wierzcholek_5_wynik = {{0}, {0}, {0}, {0}};
+        double[][] wierzcholek_5_wynik = {{0.0}, {0.0}, {0.0}, {0.0}};
         Matrix wierz_5_wynik = new Matrix(wierzcholek_5_wynik, 4, 1);
 
         //macierz wierzcholek 6 - wynik
-        double[][] wierzcholek_6_wynik = {{0}, {0}, {0}, {0}};
+        double[][] wierzcholek_6_wynik = {{0.0}, {0.0}, {0.0}, {0.0}};
         Matrix wierz_6_wynik = new Matrix(wierzcholek_6_wynik, 4, 1);
 
         //macierz wierzcholek 7 - wynik
-        double[][] wierzcholek_7_wynik = {{0}, {0}, {0}, {0}};
+        double[][] wierzcholek_7_wynik = {{0.0}, {0.0}, {0.0}, {0.0}};
         Matrix wierz_7_wynik = new Matrix(wierzcholek_7_wynik, 4, 1);
 
         //macierz wierzcholek 8 - wynik
-        double[][] wierzcholek_8_wynik = {{0}, {0}, {0}, {0}};
+        double[][] wierzcholek_8_wynik = {{0.0}, {0.0}, {0.0}, {0.0}};
         Matrix wierz_8_wynik = new Matrix(wierzcholek_8_wynik, 4, 1);
 
         //Macierz transformacji M, 100 kroków pośrednich
-        double[][] transformacja = {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}};
+        double[][] transformacja = {{0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}};
         Matrix transform = new Matrix(transformacja, 4, 4);
 
         for (int i = 0; i <= 100; i++) {
@@ -170,7 +170,7 @@ public class Obrot_kostki {
 
             //gnuplot wydruk 100 klatek dla kazdego wierzcholka
             t += 1.0 / 100;
-           
+
         }
 
     }
