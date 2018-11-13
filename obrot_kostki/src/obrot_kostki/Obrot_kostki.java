@@ -7,6 +7,8 @@ package obrot_kostki;
 
 import java.util.Scanner;
 import Jama.Matrix; //importuje class Matrix
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.lang.Math; //sinus i cosinus oraz potega
 
 /**
@@ -20,7 +22,7 @@ public class Obrot_kostki {
      */
     static Scanner scan = new Scanner(System.in);
 
-    public static void wczytaj_dane() {
+    public static void wczytaj_dane() throws FileNotFoundException {
 
         double[][] wierzcholek_1 = {{1.0}, {1.0}, {1.0}, {1.0}};
         Matrix wierz_1 = new Matrix(wierzcholek_1, 4, 1); //macierz pionowa wierzchołek nr 1 wartosc poczatkowa
@@ -118,6 +120,11 @@ public class Obrot_kostki {
         double[][] transformacja = {{0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}};
         Matrix transform = new Matrix(transformacja, 4, 4);
 
+        PrintWriter wierz1 = new PrintWriter("wierz1.txt");
+
+        wierz1.println("# x y z");
+
+        
         for (int i = 0; i <= 100; i++) {
 
             //macierz obrotu o kat alfa w zaleznosci od czasu t wzdluz osi z
@@ -160,24 +167,45 @@ public class Obrot_kostki {
             wierz_8_wynik = transl_2.times(transform).times(transl_1).times(wierz_8);
 
             System.out.println("iteracja i=" + i + ", t=" + t);
-            wierz_1_wynik.print(10, 6);
-            wierz_2_wynik.print(10, 6);
-            wierz_3_wynik.print(10, 6);
-            wierz_4_wynik.print(10, 6);
-            wierz_5_wynik.print(10, 6);
-            wierz_6_wynik.print(10, 6);
-            wierz_7_wynik.print(10, 6);
-            wierz_8_wynik.print(10, 6);
-
+            System.out.println(wierz_1_wynik.get(0, 0));
+  
+            
+            //String formato = String.format("%.2f");
+            /*wierz1.println(wierz_1_wynik.get(0, 0) +" "+wierz_1_wynik.get(1, 0) +" "+wierz_1_wynik.get(2, 0));
+            wierz1.println(wierz_2_wynik.get(0, 0) +" "+wierz_2_wynik.get(1, 0) +" "+wierz_2_wynik.get(2, 0));
+            wierz1.println(wierz_3_wynik.get(0, 0) +" "+wierz_3_wynik.get(1, 0) +" "+wierz_3_wynik.get(2, 0));
+            wierz1.println(wierz_4_wynik.get(0, 0) +" "+wierz_4_wynik.get(1, 0) +" "+wierz_4_wynik.get(2, 0));
+            wierz1.println(wierz_5_wynik.get(0, 0) +" "+wierz_5_wynik.get(1, 0) +" "+wierz_5_wynik.get(2, 0));
+            wierz1.println(wierz_6_wynik.get(0, 0) +" "+wierz_6_wynik.get(1, 0) +" "+wierz_6_wynik.get(2, 0));
+            wierz1.println(wierz_7_wynik.get(0, 0) +" "+wierz_7_wynik.get(1, 0) +" "+wierz_7_wynik.get(2, 0));
+            wierz1.println(wierz_8_wynik.get(0, 0) +" "+wierz_8_wynik.get(1, 0) +" "+wierz_8_wynik.get(2, 0));
+            wierz1.println("");
+            */
+            
+            wierz1.println(wierz_7_wynik.get(0, 0) +" "+wierz_7_wynik.get(1, 0) +" "+wierz_7_wynik.get(2, 0));
+            wierz1.println(wierz_2_wynik.get(0, 0) +" "+wierz_2_wynik.get(1, 0) +" "+wierz_2_wynik.get(2, 0));
+            wierz1.println(wierz_1_wynik.get(0, 0) +" "+wierz_1_wynik.get(1, 0) +" "+wierz_1_wynik.get(2, 0));
+            wierz1.println(wierz_6_wynik.get(0, 0) +" "+wierz_6_wynik.get(1, 0) +" "+wierz_6_wynik.get(2, 0));
+            wierz1.println(wierz_7_wynik.get(0, 0) +" "+wierz_7_wynik.get(1, 0) +" "+wierz_7_wynik.get(2, 0));
+            wierz1.println("");
+            wierz1.println(wierz_4_wynik.get(0, 0) +" "+wierz_4_wynik.get(1, 0) +" "+wierz_4_wynik.get(2, 0));
+            wierz1.println(wierz_3_wynik.get(0, 0) +" "+wierz_3_wynik.get(1, 0) +" "+wierz_3_wynik.get(2, 0));
+            wierz1.println(wierz_8_wynik.get(0, 0) +" "+wierz_8_wynik.get(1, 0) +" "+wierz_8_wynik.get(2, 0));
+            wierz1.println(wierz_5_wynik.get(0, 0) +" "+wierz_5_wynik.get(1, 0) +" "+wierz_5_wynik.get(2, 0));
+            wierz1.println(wierz_4_wynik.get(0, 0) +" "+wierz_4_wynik.get(1, 0) +" "+wierz_4_wynik.get(2, 0));
+            wierz1.println("");
+            wierz1.println("");
            
             //gnuplot wydruk 100 klatek dla kazdego wierzcholka
             t += 1.0 / 100;
 
         }
+        
+        wierz1.close();
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         wczytaj_dane();
         scan.close();
     }
