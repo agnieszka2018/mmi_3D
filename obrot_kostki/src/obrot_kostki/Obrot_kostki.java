@@ -8,6 +8,7 @@ package obrot_kostki;
 import java.util.Scanner;
 import Jama.Matrix; //importuje class Matrix
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.Math; //sinus i cosinus oraz potega
 
@@ -120,7 +121,7 @@ public class Obrot_kostki {
         double[][] transformacja = {{0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}, {0.0, 0.0, 0.0, 0.0}};
         Matrix transform = new Matrix(transformacja, 4, 4);
 
-        PrintWriter wierz1 = new PrintWriter("wierz1.txt");
+        PrintWriter wierz1 = new PrintWriter("wierz3.txt");
 
         wierz1.println("# x y z");
 
@@ -166,22 +167,6 @@ public class Obrot_kostki {
             wierz_7_wynik = transl_2.times(transform).times(transl_1).times(wierz_7);
             wierz_8_wynik = transl_2.times(transform).times(transl_1).times(wierz_8);
 
-            System.out.println("iteracja i=" + i + ", t=" + t);
-            System.out.println(wierz_1_wynik.get(0, 0));
-  
-            
-            //String formato = String.format("%.2f");
-            /*wierz1.println(wierz_1_wynik.get(0, 0) +" "+wierz_1_wynik.get(1, 0) +" "+wierz_1_wynik.get(2, 0));
-            wierz1.println(wierz_2_wynik.get(0, 0) +" "+wierz_2_wynik.get(1, 0) +" "+wierz_2_wynik.get(2, 0));
-            wierz1.println(wierz_3_wynik.get(0, 0) +" "+wierz_3_wynik.get(1, 0) +" "+wierz_3_wynik.get(2, 0));
-            wierz1.println(wierz_4_wynik.get(0, 0) +" "+wierz_4_wynik.get(1, 0) +" "+wierz_4_wynik.get(2, 0));
-            wierz1.println(wierz_5_wynik.get(0, 0) +" "+wierz_5_wynik.get(1, 0) +" "+wierz_5_wynik.get(2, 0));
-            wierz1.println(wierz_6_wynik.get(0, 0) +" "+wierz_6_wynik.get(1, 0) +" "+wierz_6_wynik.get(2, 0));
-            wierz1.println(wierz_7_wynik.get(0, 0) +" "+wierz_7_wynik.get(1, 0) +" "+wierz_7_wynik.get(2, 0));
-            wierz1.println(wierz_8_wynik.get(0, 0) +" "+wierz_8_wynik.get(1, 0) +" "+wierz_8_wynik.get(2, 0));
-            wierz1.println("");
-            */
-            
             wierz1.println(wierz_7_wynik.get(0, 0) +" "+wierz_7_wynik.get(1, 0) +" "+wierz_7_wynik.get(2, 0));
             wierz1.println(wierz_2_wynik.get(0, 0) +" "+wierz_2_wynik.get(1, 0) +" "+wierz_2_wynik.get(2, 0));
             wierz1.println(wierz_1_wynik.get(0, 0) +" "+wierz_1_wynik.get(1, 0) +" "+wierz_1_wynik.get(2, 0));
@@ -194,7 +179,7 @@ public class Obrot_kostki {
             wierz1.println(wierz_5_wynik.get(0, 0) +" "+wierz_5_wynik.get(1, 0) +" "+wierz_5_wynik.get(2, 0));
             wierz1.println(wierz_4_wynik.get(0, 0) +" "+wierz_4_wynik.get(1, 0) +" "+wierz_4_wynik.get(2, 0));
             wierz1.println("");
-            wierz1.println("");
+            //wierz1.println("");
            
             //gnuplot wydruk 100 klatek dla kazdego wierzcholka
             t += 1.0 / 100;
@@ -205,8 +190,9 @@ public class Obrot_kostki {
 
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         wczytaj_dane();
+        Runtime.getRuntime().exec("cmd /c start cmd.exe /K C:\\gnuplot\\bin\\gnuplot");
         scan.close();
     }
 
